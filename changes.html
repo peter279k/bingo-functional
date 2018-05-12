@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>changes</title>
+
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/css/highlight.dark.css">
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://ace411.github.io/bingo-functional/">
+                changes
+                <small class="hidden-xs hidden-sm">
+                    Change log for the project
+                </small>
+            </a>
+
+                            <a href="https://github.com/ace411/bingo-functional">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="https://ace411.github.io/bingo-functional/">
+                                        Introduction
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="https://ace411.github.io/bingo-functional/main.html">
+                                        Docs
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="https://ace411.github.io/bingo-functional/changes.html">
+                                        Changes
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="bingo-functional-change-log">bingo-functional change log</h1>
+<h2 id="v100">v1.0.0</h2>
+<h3 id="helpers">Helpers</h3>
+<ul>
+<li>compose()</li>
+<li>constantFunction()</li>
+<li>curry()</li>
+<li>curryN()</li>
+<li>extend()</li>
+<li>identity()</li>
+<li>memoize()</li>
+<li>partial()</li>
+<li>pick()</li>
+<li>pluck()</li>
+<li>zip()</li>
+<li>unzip()</li>
+</ul>
+<h3 id="functors">Functors</h3>
+<ul>
+<li>Either <code>Left/Right</code></li>
+<li>Maybe <code>Just/Nothing</code></li>
+<li>Applicatives <code>Applicative/CollectionApplicative</code></li>
+<li>Monad <code>Monad</code></li>
+</ul>
+<h2 id="v110">v1.1.0</h2>
+<h3 id="new-helper-functions">New Helper functions</h3>
+<ul>
+<li>head()</li>
+<li>tail()</li>
+<li>partition()</li>
+</ul>
+<h2 id="v120">v1.2.0</h2>
+<h3 id="new-helper-functions-1">New Helper functions</h3>
+<ul>
+<li>isArrayOf()</li>
+<li>partialRight()</li>
+<li>partialLeft() as a replacement for partial()</li>
+</ul>
+<h3 id="new-functor-features">New Functor features</h3>
+<ul>
+<li>TransientMutatorTrait <code>TransientMutatorTrait</code></li>
+</ul>
+<h2 id="v121">v1.2.1</h2>
+<h3 id="fixed-the-following-problems">Fixed the following problem(s)</h3>
+<ul>
+<li>
+<p>the error message shown when a mixed array (array containing more than one type) is supplied to the isArray() function.</p>
+</li>
+<li>
+<p>the partialRight() behavior of partialLeft()</p>
+</li>
+</ul>
+<h2 id="v130">v1.3.0</h2>
+<h3 id="added-the-following-functions-to-the-monad-functor">Added the following functions to the Monad functor</h3>
+<ul>
+<li>filter()</li>
+<li>flatMap()</li>
+</ul>
+<h2 id="v140">v1.4.0</h2>
+<h3 id="made-the-following-changes">Made the following change(s)</h3>
+<ul>
+<li>
+<p>the <code>pluck()</code>, <code>pick()</code>, <code>isArrayOf()</code>, and <code>memoize()</code> functions have been given callback signatures.</p>
+</li>
+<li>
+<p>the <code>extractErrorMessage()</code> function and all other related callback functions have been replaced.</p>
+</li>
+<li>
+<p>the Monad class has been replaced with new Monads: IO, Reader, Writer, and State.</p>
+</li>
+</ul>
+<h3 id="new-helper-functions-2">New helper functions</h3>
+<ul>
+<li>concat()</li>
+<li>throttle()</li>
+</ul>
+<h3 id="new-callback-functions">New callback functions</h3>
+<ul>
+<li>invalidArrayKey()</li>
+<li>invalidArrayValue()</li>
+<li>emptyArray()</li>
+<li>memoizationError() </li>
+</ul>
+<h3 id="new-monads">New monads</h3>
+<ul>
+<li>State monad</li>
+<li>IO monad</li>
+<li>Reader monad</li>
+<li>Writer monad</li>
+</ul>
+<h2 id="v150">v1.5.0</h2>
+<h3 id="new-helper-functions-3">New Helper functions</h3>
+<ul>
+<li>map()</li>
+<li>filter()</li>
+<li>fold()</li>
+<li>reduce()</li>
+</ul>
+<h2 id="v160">v1.6.0</h2>
+<h3 id="made-the-following-changes-1">Made the following change(s)</h3>
+<ul>
+<li>
+<p>Modified the <code>filter()</code> function to accurately filter values whenever a boolean predicate is defined.</p>
+</li>
+<li>
+<p>Changed parameter order of the return value for the <code>reduce()</code> function.</p>
+</li>
+</ul>
+<h3 id="new-helper-functions-4">New Helper Functions</h3>
+<ul>
+<li>arrayKeysExist()</li>
+<li>dropLeft()</li>
+<li>dropRight()</li>
+<li>unique()</li>
+<li>flatten()</li>
+</ul>
+<h2 id="v170">v1.7.0</h2>
+<h3 id="new-monad">New monad</h3>
+<ul>
+<li>ListMonad</li>
+</ul>
+<h2 id="v171">v1.7.1</h2>
+<h3 id="made-the-following-changes-2">Made the following change(s)</h3>
+<ul>
+<li>
+<p>Modified the <code>throttle()</code> function to accept multiple arguments</p>
+</li>
+<li>
+<p>Added type signatures and doc blocks for functions without any</p>
+</li>
+<li>
+<p>Added immutable const definition for <code>concat()</code> function</p>
+</li>
+</ul>
+<h2 id="v172">v1.7.2</h2>
+<h3 id="made-the-following-changes-3">Made the following change(s)</h3>
+<ul>
+<li>
+<p>Modified the <code>orElse()</code> methods of the Left, Right, Nothing, and Just functors</p>
+</li>
+<li>
+<p>Added the <code>flatMap()</code> method to the State and List monads</p>
+</li>
+</ul>
+<h2 id="v180">v1.8.0</h2>
+<h3 id="removed-the-following-callback-functions">Removed the following callback function(s)</h3>
+<ul>
+<li>invalidArrayKey()</li>
+<li>invalidArrayValue()</li>
+<li>emptyArray()</li>
+<li>memoizationError() </li>
+</ul>
+<h3 id="modified-the-following-functions">Modified the following function(s)</h3>
+<ul>
+<li>map()</li>
+<li>pick()</li>
+<li>fold()</li>
+<li>pluck()</li>
+<li>reduce()</li>
+<li>filter()</li>
+<li>memoize()</li>
+<li>isArrayOf()</li>
+</ul>
+<h3 id="new-helper-functions-5">New Helper functions</h3>
+<ul>
+<li>fill()</li>
+<li>partial()</li>
+<li>indexOf()</li>
+<li>reverse()</li>
+<li>toPairs()</li>
+<li>fromPairs()</li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
