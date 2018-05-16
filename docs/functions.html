@@ -61,6 +61,11 @@
                                     </a>
                                 </li>
                                                             <li class="">
+                                    <a href="https://ace411.github.io/bingo-functional/docs/repl.html">
+                                        Console
+                                    </a>
+                                </li>
+                                                            <li class="">
                                     <a href="https://ace411.github.io/bingo-functional/docs/changes.html">
                                         Changes
                                     </a>
@@ -160,7 +165,7 @@ $curryied = A\curry(
 );
 
 $curryied(4)(5); //should return 20</code></pre>
-<h3 id="curryn">CurryN</h3>
+<h2 id="curryn">CurryN</h2>
 <pre><code>curryN(int $paramCount, callable $function)</code></pre>
 <p><strong>Since:</strong> v1.0.0</p>
 <p><strong>Arguments:</strong></p>
@@ -201,11 +206,12 @@ $id = A\identity('foo');
 $const = A\constantFunction(1);
 $const(); //should return 1</code></pre>
 <h2 id="throttle-function">Throttle function</h2>
-<pre><code>throttle(callable $function)(mixed ...$args)</code></pre>
+<pre><code>throttle(callable $function, int $time)(mixed ...$args)</code></pre>
 <p><strong>Since:</strong> v1.4.0</p>
 <p><strong>Arguments:</strong></p>
 <ul>
 <li><strong><em>function (callable)</em></strong> - The function to throttle</li>
+<li><strong><em>time (int)</em></strong> - The throttle time</li>
 <li><strong><em>args (mixed)</em></strong> - The function arguments</li>
 </ul>
 <p>The throttle function is used to defer function processing.</p>

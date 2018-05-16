@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>install</title>
+        <title>repl</title>
 
         <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/css/font-awesome.min.css">
@@ -16,9 +16,9 @@
         <header class="navbar navbar-default navbar-fixed-top">
 
             <a class="navbar-brand" href="https://ace411.github.io/bingo-functional/">
-                install
+                repl
                 <small class="hidden-xs hidden-sm">
-                    Installation of library
+                    bingo-functional REPL docs
                 </small>
             </a>
 
@@ -76,12 +76,41 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <p>The bingo-functional library is a functional programming library built in PHP for PHP users. Available in this library are monads, Just/Nothing types, Left/Right types, applicative functors, and function algorithms meant to ease the cognitive burden for those who intend to use them. The subsequent text is documentation of the library which should help you, the reader, understand how to go about using it.</p>
+                    <p>The bingo-functional console is an appendage of the bingo-functional set of utilities. Capable of parsing idiomatic PHP input, the bingo-functional REPL is one predicated on providing a playground for interaction with the bingo-functional range of functions and functors. </p>
 <h2 id="installation">Installation</h2>
-<p>Before you can use the bingo-functional library, you should have either Git or Composer installed on your system of preference. To install the package via Composer, type the following in your preferred command line interface:</p>
-<pre><code>composer require chemem/bingo-functional</code></pre>
-<p>To install via Git, type:</p>
-<pre><code>git clone https://github.com/ace411/bingo-functional.git</code></pre>
+<p>To install the bingo-functional REPL, type the following text in a command line of your choosing:</p>
+<pre><code>composer require chemem/bingo-functional-repl</code></pre>
+<h2 id="supported-expressions">Supported Expressions</h2>
+<p>The bingo-functional console uses the <a href="https://github.com/nikic/PHP-Parser">PHP parser</a> written by <a href="https://github.com/nikic">Nikita Popov</a>. The premise of the console is extending script-executable bingo-functional functions to the command-line. The console, therefore, supports a limited range of actions listed below:</p>
+<ul>
+<li>the echo statement followed by either a string or number or float</li>
+</ul>
+<pre><code>bingo-functional&gt; echo "foo"
+Result: "foo"
+bingo-functional&gt; echo 12
+Result: 12
+bingo-functional&gt; echo 2.552
+Result: 2.552</code></pre>
+<ul>
+<li>bingo-functional library-specific calls which can take on single or multiple inline function calls</li>
+</ul>
+<pre><code>bingo-functional&gt; curry(function ($a, $b) {return $a / $b;})(12)(6)
+Result: 2
+bingo-functional&gt; map(function ($val) {return $val * 2;}, [1, 2, 3])
+Result: [2,4,6]</code></pre>
+<ul>
+<li>bingo-functional library monad-specific static expressions which output serialized objects or scalar values upon parsing</li>
+</ul>
+<pre><code>bingo-functional&gt; State::of(1)-&gt;map(function ($a) {return $a + 3;})
+Result: &lt;State&gt; [1,4]
+bingo-functional&gt; Either::pure(12)-&gt;flatMap(function ($a) {return $a * 2;})
+Result: 24</code></pre>
+<ul>
+<li>constants limited to the help and version directives</li>
+</ul>
+<pre><code>bingo-functional&gt; version
+Result: 1.0.0</code></pre>
+<p><strong>Note:</strong> To make the most of the console experience, read the rest of the bingo-functional documentation.</p>
                 </section>
 
             </div>
