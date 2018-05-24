@@ -51,6 +51,11 @@
                                     </a>
                                 </li>
                                                             <li class="">
+                                    <a href="https://ace411.github.io/bingo-functional/docs/pattern-matching.html">
+                                        Pattern Matching
+                                    </a>
+                                </li>
+                                                            <li class="">
                                     <a href="https://ace411.github.io/bingo-functional/docs/collection.html">
                                         Collection Helpers
                                     </a>
@@ -239,28 +244,6 @@ echo $throttle(0);
 );
 
 $factorial(130); //outputs float(6.4668554892205E+219)</code></pre>
-<h2 id="pattern-matching">Pattern Matching</h2>
-<pre><code>match(array $matches)(array $values)</code></pre>
-<p><strong>Since:</strong> v1.8.0</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><strong><em>matches (array)</em></strong> - A Haskell-esque pattern-function key-value list</li>
-<li><strong><em>values (array)</em></strong> - Values for computation</li>
-</ul>
-<p>The goal of pattern matching is to bind values to successful matches. Pattern matching is similar to the switch statement.The patterns used in the pattern-matching function are a near facsimile of the <a href="https://en.wikibooks.org/wiki/Haskell/Pattern_matching">Haskell pattern-matching patterns</a>. </p>
-<pre><code class="language-php">$match = Chemem\Bingo\Functional\PatternMatching\match([
-    '(a:b:_)' =&gt; function (int $a, int $b) {
-        return $a / $b;
-    },
-    '(a:_)' =&gt; function (int $a) {
-        return $a * 2;
-    },
-    '_' =&gt; function () {
-        return 1;
-    }
-]);
-
-$result = $match([10, 5]); //computes 10/5 and outputs 2</code></pre>
 <h2 id="callback-signatures">Callback signatures</h2>
 <p><strong>Note:</strong> Callbacks will not be usable beyond bingo-functional v1.7.2. Check out the <a href="https://ace411.github.io/bingo-functional/changes">changelog</a>.</p>
 <p>These are essential for proper functioning of the the following helper functions: <code>pluck()</code>, <code>pick()</code>, <code>memoize()</code>, as well as <code>isArrayOf()</code>. The following callback signatures correspond to the functions listed:</p>
