@@ -170,6 +170,21 @@ $curryied = A\curry(
 );
 
 $curryied(4)(5); //should return 20</code></pre>
+<h3 id="curryright">curryRight</h3>
+<pre><code>curryRight(callable $function)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to curry</li>
+</ul>
+<p>Curry a function from right to left.</p>
+<pre><code class="language-php">$curryiedRight = A\curryRight(
+    function (int $a, int $b) {
+        return $a / $b;
+    }
+);
+
+$curryiedRight(4)(8); //outputs 2</code></pre>
 <h2 id="curryn">CurryN</h2>
 <pre><code>curryN(int $paramCount, callable $function)</code></pre>
 <p><strong>Since:</strong> v1.0.0</p>
@@ -188,6 +203,23 @@ $curryied = A\curryN(
 );
 
 $curryied(2)(3); //should return 5</code></pre>
+<h3 id="curryrightn">curryRightN</h3>
+<pre><code>curryRightN(int $paramCount, callable $function)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>paramCount (int)</em></strong> - The number of parameters to curry</li>
+<li><strong><em>function (callable)</em></strong> - The function to curry</li>
+</ul>
+<p>Similar to the curryN function but best suited for currying from right to left.</p>
+<pre><code class="language-php">$curryied = A\curryRightN(
+    2,
+    function (int $a = 1, int $b, int $c) : int {
+        return $a + $b + $c;
+    }
+);
+
+$curryied(2)(3); //evaluates to 6</code></pre>
 <h2 id="identity">Identity</h2>
 <pre><code>identity(mixed $value)</code></pre>
 <p><strong>Since:</strong> v1.0.0</p>

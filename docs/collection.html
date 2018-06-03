@@ -294,6 +294,25 @@ $sumOfEven = A\fold(
     0
 ); 
 //should evaluate to 12</code></pre>
+<h3 id="reduceright-function">ReduceRight function</h3>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The filter function</li>
+<li><strong><em>collection (array)</em></strong> - The array whose values are evaluated</li>
+<li><strong><em>acc (mixed)</em></strong> - The accumulator value</li>
+</ul>
+<p>Folds an array but does so from right to left.</p>
+<pre><code class="language-php">$collection = ["foo", "bar", "baz"];
+
+$sumOfEven = A\fold(
+    function (string $separator, string $val) : string {
+        return rtrim($val . $separator, $separator);
+    },
+    $collection,
+    '_'
+);
+//evaluates to "baz_bar_foo"</code></pre>
 <h2 id="unique-function">Unique function</h2>
 <pre><code>unique(array $array)</code></pre>
 <p><strong>Since:</strong> v1.6.0</p>
@@ -388,6 +407,101 @@ var_dump($toPairs); //prints [['foo', 'baz'], ['bar', 'baz'], ['boo', 1]]</code>
 <pre><code class="language-php">$fromPairs = A\fromPairs([['foo', 'baz'], ['bar', 'baz'], ['boo', 1]]);
 
 var_dump($fromPairs); //outputs ['foo' =&gt; 'baz', 'bar' =&gt; 'baz', 'boo' =&gt; 1]</code></pre>
+<h2 id="every-function">Every function</h2>
+<pre><code>every(array $array, callable $function)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong><em>array (array)</em></strong> - The key-value collection</li>
+<li><strong><em>function (callable)</em></strong> - The function whose boolean assertion is used</li>
+</ul>
+<p>The every function checks if a boolean assertion in a function holds for every value in a list.</p>
+<pre><code class="language-php">$result = A\every(
+    [1, 2, 3, 4],
+    function ($val) : bool {
+        return is_int($val);
+    }
+);
+
+echo $result; //outputs true</code></pre>
+<h2 id="any-function">Any function</h2>
+<pre><code>any(array $array, callable $function)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong><em>array (array)</em></strong> - The key-value collection</li>
+<li><strong><em>function (callable)</em></strong> - The function whose boolean assertion is used</li>
+</ul>
+<p>The any function, unlike its relative, the every function, checks if a single value in a list conforms to the boolean predicate in a function signature.</p>
+<pre><code class="language-php">$result = A\any(
+    [false, true, 1, 2, 3],
+    function ($val) : bool {
+        return is_bool($val);
+    }
+);
+
+echo $result; //outputs true</code></pre>
+<h2 id="groupby-function">GroupBy function</h2>
+<pre><code>groupBy(array $array, mixed $key)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong><em>array (array)</em></strong> - The array to sort</li>
+<li><strong><em>key (mixed)</em></strong> - The key to use for the grouping</li>
+</ul>
+<p>The groupBy function is one that sorts a multi-dimensional array by a defined key. </p>
+<pre><code class="language-php">$group = A\groupBy(
+    [
+        ['pos' =&gt; 'pg', 'name' =&gt; 'dragic'],
+        ['pos' =&gt; 'sg', 'name' =&gt; 'jordan'],
+        ['pos' =&gt; 'sg', 'name' =&gt; 'wade']
+    ],
+    'pos'
+);
+
+var_dump($group); 
+//outputs ['pg' =&gt; [['pos' =&gt; 'pg', 'name' =&gt; 'dragic']], 'sg' =&gt; [['pos' =&gt; 'sg', 'name' =&gt; 'jordan'], ['pos' =&gt; 'sg', 'name' =&gt; 'wade']]]</code></pre>
+<h2 id="where-function">Where function</h2>
+<pre><code>where(array $list, array $search)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong><em>list (array)</em></strong> - The array to search</li>
+<li><strong><em>search (array)</em></strong> - The list fragment that is the basis for the search</li>
+</ul>
+<p>The where function searches a multi-dimensional array using a fragment of a sub-array defined in said multi-dimensional array.</p>
+<pre><code class="language-php">$result = A\where(
+    [
+        ['pos' =&gt; 'pg', 'name' =&gt; 'dragic'],
+        ['pos' =&gt; 'sg', 'name' =&gt; 'wade']
+    ],
+    ['name' =&gt; 'dragic']
+);
+
+var_dump($result);
+//outputs [['pos' =&gt; 'pg', 'name' =&gt; 'dragic']]</code></pre>
+<h2 id="min-function">Min function</h2>
+<pre><code>min(array $array)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong><em>array (array)</em></strong> - The list whose lowest value is to be computed</li>
+</ul>
+<p>Finds the lowest value in an array.</p>
+<pre><code class="language-php">$min = A\min([22, 19, 12, 98]);
+
+echo $min; //outputs 12</code></pre>
+<h2 id="max-function">Max function</h2>
+<pre><code>max(array $array)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><strong><em>array (array)</em></strong> - The list whose largest value is to be computed</li>
+</ul>
+<p>Finds the largest value in an array.</p>
+<pre><code class="language-php">$max = A\max([22, 19, 98, 12]);
+
+echo $max; //outputs 98</code></pre>
                 </section>
 
             </div>
