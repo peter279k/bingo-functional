@@ -126,7 +126,7 @@
 <p><br /></p>
 <p>The pattern matching subset of the bingo-functional library is quite similar to the <a href="https://packagist.org/packages/functional-php/pattern-matching">pattern-matching library</a> created by <a href="https://github.com/krtek4">Gilles Crettenand</a>. It is, in fact, inspired by the works of the said individual. </p>
 <h2 id="match-function">match function</h2>
-<pre><code>match(array $patterns, array $values)</code></pre>
+<pre><code>match(array $patterns)(array $values)</code></pre>
 <p><strong>Since:</strong> v1.8.0</p>
 <p><strong>Arguments:</strong></p>
 <ul>
@@ -178,7 +178,7 @@ $scalarMatch = PM\patternMatch(
         }
     ],
     'foo'
-);</code></pre>
+); //outputs FOO</code></pre>
 <p>The patternMatch function's primary feature, the array match is possible for multiple values parsed into an array.</p>
 <pre><code class="language-php">$arrayMatch = PM\patternMatch(
     [
@@ -197,7 +197,7 @@ $scalarMatch = PM\patternMatch(
         }
     ],
     ['foo', 'bar', 'functional']
-);</code></pre>
+); //outputs fUNCTIONAL</code></pre>
                 </section>
 
             </div>
