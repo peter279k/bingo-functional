@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="lazyload" lang="en">
+    <head>
+        <title>pattern-matching · Pattern Matching</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <meta name="description" content="Pattern Matching docs">
+        <link rel="icon" type="image/png" href="https://ace411.github.io/bingo-functional/icon.png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share:400|Jaldi:400,700|Fira+Mono:400,700">
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/assets/base.css">
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/assets/lindoc.css">
+        <style>
+            a,.results strong{color:#a6a2a2}
+            button,input[type=submit],input[type=button],input[type=reset],.button,.search input[type=submit]{background-color:#a6a2a2}
+            .search input[type=text]:focus,.results,.results strong{border-color:#a6a2a2 !important}
+            @media screen and (min-width:1450px){.livetoc a.active{ color:#a6a2a2}}
+        </style>
+        <script>
+            // Parent Elements - e.P("body") - https://gist.github.com/moqmar/0995cf6595201f7a062fb173cb4ab938
+            (function(E){E.matches||(E.matches=E.matchesSelector||E.msMatchesSelector||E.webkitMatchesSelector)})(Element.prototype)
+            Element.prototype.P=function(s){var e=this
+            if(!s||typeof s=="number")for(var i=0;i<(s||1);i++)e=e?e.parentElement:e
+            else if(typeof s=="string")while(e&&!e.matches(s))e=e.parentElement
+            else while(e&&e!=s)e=e.parentElement
+            return e}
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>
+                <a href="https://ace411.github.io/bingo-functional/"><img src="bingo-functional-logo.png" alt="Pattern Matching"></a>
+            </h1>
+            <!-- THIS DOCUMENT IS INDEXED -->
+            <div class="search" role="search"><form data-baseurl="https://ace411.github.io/bingo-functional" onsubmit="search(this); return false;">
+                <input type="text" class="search-query" oninput="search(this.parentElement)" placeholder="Search...">
+                <input type="submit" value="➜">
+            </form><div class="results"></div></div>
+            <div class="language">
+                <input type="checkbox" id="language-select">
+                <label for="language-select"><img src="https://ace411.github.io/bingo-functional/assets/flags/en.png"></label>
+                <div class="language-select-popup" data-default-language="en">
+                    <a href="https://ace411.github.io/bingo-functional/pattern-matching.html"><img src="https://ace411.github.io/bingo-functional/assets/flags/en.png"></a>
+                </div>
+                <script>
+                    document.getElementById("language-select").checked = false;
+                    window.addEventListener("click", function(event) {
+                        if (!event.target.P(".language")) document.getElementById("language-select").checked = false;
+                    })
+                </script>
+            </div>
+            <nav class="breadcrumbs">
+                <a href="https://ace411.github.io/bingo-functional/">Pattern Matching</a> » <strong>pattern-matching</strong>
+            </nav>
+        </header>
+
+        <main>
+            <aside class="toc"><ul></ul></aside>
+            <article>
+                <template search-description>Pattern Matching docs</template>
+
+                <nav class="pagination">
+                    <div>« <a href="https://ace411.github.io/bingo-functionalcollection.html">Collection Helpers</a></div>
+                    <div><a href="https://ace411.github.io/bingo-functionalfunctors.html">Functors</a> »</div>
+                </nav>
+
+<!-- CONTENT START -->
+<p>The goal of pattern matching is to bind values to successful matches. Pattern matching is similar to the switch statement. The patterns used in the pattern-matching function are a near facsimile of the <a href="https://en.wikibooks.org/wiki/Haskell/Pattern_matching">Haskell pattern-matching patterns</a>. Because pattern matching is a core feature of a language like Haskell, implementing it in PHP is quite the uphill task. The bingo-functional library has two pattern matching functions that conform to the patterns shown in the table below: <code>match</code> and <code>patternMatch</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern name</th>
+<th>Format</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>constant</td>
+<td>A scalar value</td>
+<td><code>12</code>, <code>12.02</code>, <code>"foo"</code></td>
+</tr>
+<tr>
+<td>variable</td>
+<td>Any value identifier</td>
+<td><code>foo</code>, <code>bar</code>, <code>baz</code></td>
+</tr>
+<tr>
+<td>array</td>
+<td>[constant, ..., variable]</td>
+<td><code>'["foo", "bar", baz]'</code></td>
+</tr>
+<tr>
+<td>cons</td>
+<td>(identifier:identifier)</td>
+<td><code>(foo:bar:_)</code></td>
+</tr>
+<tr>
+<td>wildcard</td>
+<td>_</td>
+<td><code>'_'</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br /></p>
+<p>The pattern matching subset of the bingo-functional library is quite similar to the <a href="https://packagist.org/packages/functional-php/pattern-matching">pattern-matching library</a> created by <a href="https://github.com/krtek4">Gilles Crettenand</a>. It is, in fact, inspired by the works of the said individual. </p>
+<h2 id="match-function">match function</h2>
+<pre><code>match(array $patterns)(array $values)</code></pre>
+<p><strong>Since:</strong> v1.8.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>patterns (array)</em></strong> - The patterns to evaluate</li>
+<li><strong><em>values (array)</em></strong> - The values for comparison</li>
+</ul>
+<p>The match function deals primarily with cons, values separated by a colon. The cons serve as arguments for the accompanying lambdas: each cons pattern has a wildcard before its closing brace.</p>
+<pre><code class="language-php">use Chemem\Bingo\Functional\PatternMatching as PM;
+
+$match = PM\match(
+    [
+        '(x:xs:_)' =&gt; function (int $x, int $xs) {
+            return $x / $xs;
+        },
+        '(x:_)' =&gt; function (int $x) {
+            return $x * 2;
+        },
+        '_' =&gt; function () {
+            return 1;
+        }
+    ]
+);
+
+$result = $match([10, 5]);</code></pre>
+<h2 id="patternmatch-function">patternMatch function</h2>
+<pre><code>patternMatch(array $patterns, mixed $values)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>patterns (array)</em></strong> - The patterns to evaluate</li>
+<li><strong><em>values (mixed)</em></strong> - The values for comparison</li>
+</ul>
+<p>The pattern match function is useful for array content comparisons like URL and switch statement-driven matches. The patternMatch function combines arrays, constants, and variables and assesses the specificity of each pattern provided. </p>
+<p>The patternMatch function can detect string matches for single scalar values and evaluate the right function bindings based on value specifics.</p>
+<pre><code class="language-php">use Chemem\Bingo\Functional\PatternMatching as PM;
+
+$scalarMatch = PM\patternMatch(
+    [
+        '"foo"' =&gt; function () {
+            $val = strtoupper('foo');
+
+            return $val;
+        },
+        '"bar"' =&gt; function () {
+            return 'bar';
+        },
+        '_' =&gt; function () {
+            return 'undefined';
+        }
+    ],
+    'foo'
+); //outputs FOO</code></pre>
+<p>The patternMatch function's primary feature, the array match is possible for multiple values parsed into an array.</p>
+<pre><code class="language-php">$arrayMatch = PM\patternMatch(
+    [
+        '["foo", "bar", baz]' =&gt; function (string $baz) {
+            $val = lcfirst(strtoupper($baz));
+
+            return $val;
+        },
+        '["foo", "bar"]' =&gt; function () {
+            $val = strtoupper('foo-bar');
+
+            return $val;
+        },
+        '_' =&gt; function () {
+            return 'undefined';
+        }
+    ],
+    ['foo', 'bar', 'functional']
+); //outputs fUNCTIONAL</code></pre>
+<!-- CONTENT END -->
+                <nav class="pagination">
+                    <div>« <a href="https://ace411.github.io/bingo-functionalcollection.html">Collection Helpers</a></div>
+                    <div><a href="https://ace411.github.io/bingo-functionalfunctors.html">Functors</a> »</div>
+                </nav>
+            </article>
+            <aside class="sidebar">
+                <hr>
+                <h2>Links</h2>
+                <div class="bulletlink"><a href="index.html">Install</a></div>
+                <div class="bulletlink"><a href="functions.html">Function Helpers</a></div>
+                <div class="bulletlink"><a href="collection.html">Collection Helpers</a></div>
+                <div class="bulletlink"><a href="pattern-matching.html">Pattern Matching</a></div>
+                <div class="bulletlink"><a href="functors.html">Functors</a></div>
+                <div class="bulletlink"><a href="repl.html">Console</a></div>
+                <div class="bulletlink"><a href="changes.html">Changes</a></div>
+            </aside>
+            <footer>
+                <hr>
+
+<!-- FOOTER BEGIN -->
+bingo-functional 2018 - Built by Lochemem Bruno Michael
+<!-- FOOTER END -->
+
+            </footer>
+        </main>
+
+        <script src="https://ace411.github.io/bingo-functional/assets/toc.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/autoloader/prism-autoloader.min.js"></script>
+        <script>Prism.plugins.autoloader.languages_path = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/";</script>
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/assets/prism.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/js-search@1.4.2/dist/umd/js-search.min.js"></script>
+        <script src="https://ace411.github.io/bingo-functional/assets/search.js"></script>
+    </body>
+</html>

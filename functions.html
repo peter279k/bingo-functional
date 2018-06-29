@@ -1,0 +1,317 @@
+<!doctype html>
+<html class="lazyload" lang="en">
+    <head>
+        <title>functions · function-helpers</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <meta name="description" content="Documentation for helper functions used on functions">
+        <link rel="icon" type="image/png" href="https://ace411.github.io/bingo-functional/icon.png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share:400|Jaldi:400,700|Fira+Mono:400,700">
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/assets/base.css">
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/assets/lindoc.css">
+        <style>
+            a,.results strong{color:#a6a2a2}
+            button,input[type=submit],input[type=button],input[type=reset],.button,.search input[type=submit]{background-color:#a6a2a2}
+            .search input[type=text]:focus,.results,.results strong{border-color:#a6a2a2 !important}
+            @media screen and (min-width:1450px){.livetoc a.active{ color:#a6a2a2}}
+        </style>
+        <script>
+            // Parent Elements - e.P("body") - https://gist.github.com/moqmar/0995cf6595201f7a062fb173cb4ab938
+            (function(E){E.matches||(E.matches=E.matchesSelector||E.msMatchesSelector||E.webkitMatchesSelector)})(Element.prototype)
+            Element.prototype.P=function(s){var e=this
+            if(!s||typeof s=="number")for(var i=0;i<(s||1);i++)e=e?e.parentElement:e
+            else if(typeof s=="string")while(e&&!e.matches(s))e=e.parentElement
+            else while(e&&e!=s)e=e.parentElement
+            return e}
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>
+                <a href="https://ace411.github.io/bingo-functional/"><img src="bingo-functional-logo.png" alt="function-helpers"></a>
+            </h1>
+            <!-- THIS DOCUMENT IS INDEXED -->
+            <div class="search" role="search"><form data-baseurl="https://ace411.github.io/bingo-functional" onsubmit="search(this); return false;">
+                <input type="text" class="search-query" oninput="search(this.parentElement)" placeholder="Search...">
+                <input type="submit" value="➜">
+            </form><div class="results"></div></div>
+            <div class="language">
+                <input type="checkbox" id="language-select">
+                <label for="language-select"><img src="https://ace411.github.io/bingo-functional/assets/flags/en.png"></label>
+                <div class="language-select-popup" data-default-language="en">
+                    <a href="https://ace411.github.io/bingo-functional/functions.html"><img src="https://ace411.github.io/bingo-functional/assets/flags/en.png"></a>
+                </div>
+                <script>
+                    document.getElementById("language-select").checked = false;
+                    window.addEventListener("click", function(event) {
+                        if (!event.target.P(".language")) document.getElementById("language-select").checked = false;
+                    })
+                </script>
+            </div>
+            <nav class="breadcrumbs">
+                <a href="https://ace411.github.io/bingo-functional/">function-helpers</a> » <strong>functions</strong>
+            </nav>
+        </header>
+
+        <main>
+            <aside class="toc"><ul></ul></aside>
+            <article>
+                <template search-description>Documentation for helper functions used on functions</template>
+
+                <nav class="pagination">
+                    <div>« <a href="https://ace411.github.io/bingo-functionalindex.html">Installation</a></div>
+                    <div><a href="https://ace411.github.io/bingo-functionalcollection.html">Collection Helpers</a> »</div>
+                </nav>
+
+<!-- CONTENT START -->
+<h2 id="composing-functions">Composing functions</h2>
+<pre><code>compose(callable ...$functions)</code></pre>
+<p>The ability to combine functions is a concept borrowed from mathematics. Simply put, composition is applying a function to the output of another function thereby transforming it. A function f and another function g can be 'composed' to create a function f o g.</p>
+<p><strong>Since:</strong> v1.0.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>functions (callable)</em></strong> - The functions to chain</li>
+</ul>
+<pre><code class="language-php">use Chemem\Bingo\Functional\Algorithms as A;
+
+$composed = A\compose(
+    function (int $a) : int {
+        return $a + 10;
+    },
+    function (int $a) : int {
+        return $a * 10;
+    }
+); //could be any callable value(s)
+
+$output = array_map($composed, [1, 2, 3]);
+//should return [110, 120, 130]</code></pre>
+<h2 id="partial-application">Partial application</h2>
+<pre><code>partial(callable $function, mixed ...$args)(mixed ...$args)</code></pre>
+<p>If the intention is to supply parameters to a function incrementally, partial application is a possible solution. At the core of partial application is binding arguments to a function.</p>
+<p><strong>Since:</strong> 1.0.0, excluded from versions 1.2.0 to 1.7.2</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to which arguments are partially applied</li>
+<li><strong><em>args (mixed)</em></strong> - The arguments to bind to the function</li>
+</ul>
+<pre><code class="language-php">
+$partial = A\partial(
+    function (int $a, int $b) : int {
+        return $a + $b;
+    },
+    1
+); //bind the argument 1 to the function
+
+$partial(2); //bind 2 to the function; should return 3</code></pre>
+<h3 id="partial-left">Partial-Left</h3>
+<pre><code>partialLeft(callable $function, mixed ...$args)(mixed ...$args)</code></pre>
+<p><strong>Since:</strong> v1.2.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to which arguments are partially applied</li>
+<li><strong><em>args (mixed)</em></strong> - The arguments to bind to the function</li>
+</ul>
+<p>Works just like the partial function. Arguments are, with the partialLeft function, incrementally supplied from left to right.</p>
+<pre><code class="language-php">$partialLeft = A\partialLeft(
+    function (int $a, int $b) : int {
+        return $a - $b;
+    },
+    12
+);
+
+$partialLeft(9); //should output 3</code></pre>
+<h3 id="partial-right">Partial-Right</h3>
+<pre><code>partialRight(callable $function, mixed ...$args)(mixed ...$args)</code></pre>
+<p><strong>Since:</strong> v1.2.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to which arguments are partially applied</li>
+<li><strong><em>args (mixed)</em></strong> - The arguments to bind to the function</li>
+</ul>
+<p>This is the antipode of the partialLeft function. The argument order is right to left.</p>
+<pre><code class="language-php">$partialRight = A\partialRight(
+    function (int $a, int $b) : int {
+        return $a - $b;
+    },
+    9
+);
+
+$partialRight(12); //outputs 3</code></pre>
+<h2 id="currying">Currying</h2>
+<pre><code>curry(callable $function)</code></pre>
+<p><strong>Since:</strong> v1.0.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to curry</li>
+</ul>
+<p>Related to partial application is currying which is premised on splitting a higher-order function into smaller functions each taking a single argument. The idea of binding arguments to a function incrementally features strongly here as well.</p>
+<pre><code class="language-php">
+$curryied = A\curry(
+    function (int $a, int $b) : int {
+        return $a * $b;
+    }
+);
+
+$curryied(4)(5); //should return 20</code></pre>
+<h3 id="curryright">curryRight</h3>
+<pre><code>curryRight(callable $function)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to curry</li>
+</ul>
+<p>Curry a function from right to left.</p>
+<pre><code class="language-php">$curryiedRight = A\curryRight(
+    function (int $a, int $b) {
+        return $a / $b;
+    }
+);
+
+$curryiedRight(4)(8); //outputs 2</code></pre>
+<h2 id="curryn">CurryN</h2>
+<pre><code>curryN(int $paramCount, callable $function)</code></pre>
+<p><strong>Since:</strong> v1.0.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>paramCount (int)</em></strong> - The number of parameters to curry</li>
+<li><strong><em>function (callable)</em></strong> - The function to curry</li>
+</ul>
+<p>The curryN function allows for specifying the number of parameters to curry. This can be used for functions with default/optional parameters.</p>
+<pre><code class="language-php">
+$curryied = A\curryN(
+    2,
+    function (int $a, int $b, int $c = null) : int {
+        return $a + $b + $c;
+    }
+);
+
+$curryied(2)(3); //should return 5</code></pre>
+<h3 id="curryrightn">curryRightN</h3>
+<pre><code>curryRightN(int $paramCount, callable $function)</code></pre>
+<p><strong>Since:</strong> v1.8.1</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>paramCount (int)</em></strong> - The number of parameters to curry</li>
+<li><strong><em>function (callable)</em></strong> - The function to curry</li>
+</ul>
+<p>Similar to the curryN function but best suited for currying from right to left.</p>
+<pre><code class="language-php">$curryied = A\curryRightN(
+    2,
+    function (int $a = 1, int $b, int $c) : int {
+        return $a + $b + $c;
+    }
+);
+
+$curryied(2)(3); //evaluates to 6</code></pre>
+<h2 id="identity">Identity</h2>
+<pre><code>identity(mixed $value)</code></pre>
+<p><strong>Since:</strong> v1.0.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>value (mixed)</em></strong> - An arbitrary value</li>
+</ul>
+<p>Central to the identity law of functors is the identity function. This function is pretty straightforward; it returns the value it receives with no transformations whatsoever.</p>
+<pre><code class="language-php">
+$id = A\identity('foo');
+//should return foo</code></pre>
+<h2 id="constant-function">Constant function</h2>
+<pre><code>constantFunction(mixed $value)</code></pre>
+<p><strong>Since:</strong> v1.0.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>value (mixed)</em></strong> - An arbitrary value</li>
+</ul>
+<p>The constant function is one that always returns the first argument it receives.</p>
+<pre><code class="language-php">
+$const = A\constantFunction(1);
+$const(); //should return 1</code></pre>
+<h2 id="throttle-function">Throttle function</h2>
+<pre><code>throttle(callable $function, int $time)(mixed ...$args)</code></pre>
+<p><strong>Since:</strong> v1.4.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to throttle</li>
+<li><strong><em>time (int)</em></strong> - The throttle time</li>
+<li><strong><em>args (mixed)</em></strong> - The function arguments</li>
+</ul>
+<p>The throttle function is used to defer function processing.</p>
+<pre><code class="language-php">$addTwelve = function (int $val) : int {
+    return $val + 12;
+};
+
+$throttle = A\throttle($addTwelve, 10);
+
+echo $throttle(0);
+//prints the digit 12 after 10 seconds</code></pre>
+<p><strong>Note:</strong> The throttle function as of v1.7.1 supports functions with multiple arguments.</p>
+<h2 id="memoize-function">Memoize function</h2>
+<pre><code>memoize(callable $function)</code></pre>
+<p><strong>Since:</strong> v1.0.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The function to memoize</li>
+</ul>
+<p>Sometimes, a computation might be expensive. Memoization ensures that the output of a computed result is cached and conveyed.</p>
+<pre><code class="language-php">$factorial = A\memoize(
+    function (int $num) use (&amp;$factorial) {
+        return $num &lt; 2 ? 1 : $factorial($num - 1) * $num;
+    }
+);
+
+$factorial(130); //outputs float(6.4668554892205E+219)</code></pre>
+<h2 id="callback-signatures">Callback signatures</h2>
+<p><strong>Note:</strong> Callbacks will not be usable beyond bingo-functional v1.7.2. Check out the <a href="https://ace411.github.io/bingo-functional/changes">changelog</a>.</p>
+<p>These are essential for proper functioning of the the following helper functions: <code>pluck()</code>, <code>pick()</code>, <code>memoize()</code>, as well as <code>isArrayOf()</code>. The following callback signatures correspond to the functions listed:</p>
+<ul>
+<li>
+<p><code>invalidArrayKey :: key -&gt; errMsg</code></p>
+</li>
+<li>
+<p><code>invalidArrayValue :: key -&gt; errMsg</code></p>
+</li>
+<li>
+<p><code>memoizationError :: Callable fn -&gt; errMsg</code></p>
+</li>
+<li>
+<p><code>emptyArray :: Nothing -&gt; errMsg</code> </p>
+</li>
+</ul>
+<p><strong>Note:</strong> You can write your own callbacks provided they adhere to the signatures listed above.</p>
+<!-- CONTENT END -->
+                <nav class="pagination">
+                    <div>« <a href="https://ace411.github.io/bingo-functionalindex.html">Installation</a></div>
+                    <div><a href="https://ace411.github.io/bingo-functionalcollection.html">Collection Helpers</a> »</div>
+                </nav>
+            </article>
+            <aside class="sidebar">
+                <hr>
+                <h2>Links</h2>
+                <div class="bulletlink"><a href="index.html">Install</a></div>
+                <div class="bulletlink"><a href="functions.html">Function Helpers</a></div>
+                <div class="bulletlink"><a href="collection.html">Collection Helpers</a></div>
+                <div class="bulletlink"><a href="pattern-matching.html">Pattern Matching</a></div>
+                <div class="bulletlink"><a href="functors.html">Functors</a></div>
+                <div class="bulletlink"><a href="repl.html">Console</a></div>
+                <div class="bulletlink"><a href="changes.html">Changes</a></div>
+            </aside>
+            <footer>
+                <hr>
+
+<!-- FOOTER BEGIN -->
+bingo-functional 2018 - Built by Lochemem Bruno Michael
+<!-- FOOTER END -->
+
+            </footer>
+        </main>
+
+        <script src="https://ace411.github.io/bingo-functional/assets/toc.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/plugins/autoloader/prism-autoloader.min.js"></script>
+        <script>Prism.plugins.autoloader.languages_path = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/";</script>
+        <link rel="stylesheet" href="https://ace411.github.io/bingo-functional/assets/prism.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/js-search@1.4.2/dist/umd/js-search.min.js"></script>
+        <script src="https://ace411.github.io/bingo-functional/assets/search.js"></script>
+    </body>
+</html>
