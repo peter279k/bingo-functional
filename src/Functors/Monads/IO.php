@@ -2,7 +2,7 @@
 
 /**
  * IO monad
- * 
+ *
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0
@@ -20,7 +20,7 @@ class IO
 
     /**
      * IO monad constructor
-     * 
+     *
      * @param callable $operation
      */
 
@@ -31,7 +31,7 @@ class IO
 
     /**
      * of method
-     * 
+     *
      * @static of
      * @param callable $operation
      * @return object IO
@@ -44,8 +44,8 @@ class IO
 
     /**
      * map method
-     * 
-     * @param callable $function 
+     *
+     * @param callable $function
      * @return object IO
      */
 
@@ -56,8 +56,8 @@ class IO
 
     /**
      * bind method
-     * 
-     * @param callable $function 
+     *
+     * @param callable $function
      * @return object IO
      */
 
@@ -68,7 +68,7 @@ class IO
 
     /**
      * exec method
-     *  
+     *
      * @return $operation
      */
 
@@ -79,8 +79,8 @@ class IO
 
     /**
      * flatMap method
-     * 
-     * @param callable $function 
+     *
+     * @param callable $function
      * @return mixed $operation
      */
 

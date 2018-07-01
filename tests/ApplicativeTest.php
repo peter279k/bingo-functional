@@ -4,7 +4,8 @@ namespace Chemem\Bingo\Functional\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Chemem\Bingo\Functional\Common\Applicatives\ApplicativeAbstract;
-use Chemem\Bingo\Functional\Functors\Applicatives\{Applicative, CollectionApplicative};
+use Chemem\Bingo\Functional\Functors\Applicatives\Applicative;
+use Chemem\Bingo\Functional\Functors\Applicatives\CollectionApplicative;
 
 class ApplicativeTest extends TestCase
 {

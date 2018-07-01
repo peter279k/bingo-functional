@@ -2,7 +2,7 @@
 
 /**
  * Reader monad
- * 
+ *
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0
@@ -22,7 +22,7 @@ class Reader
 
     /**
      * Reader constructor
-     * 
+     *
      * @param callable $action
      */
     public function __construct($action)
@@ -32,7 +32,7 @@ class Reader
 
     /**
      * of method
-     * 
+     *
      * @static of
      * @param mixed $action
      * @return object Reader
@@ -40,7 +40,7 @@ class Reader
 
     public static function of($action) : Reader
     {
-        return is_callable($action) ? 
+        return is_callable($action) ?
             new static($action) :
             new static(
                 function ($env) use ($action) {
@@ -51,7 +51,7 @@ class Reader
 
     /**
      * withReader method
-     * 
+     *
      * @param callable $action
      * @return object Reader
      */
@@ -68,7 +68,7 @@ class Reader
 
     /**
      * map method
-     * 
+     *
      * @param callable $action
      * @return object Reader
      */
@@ -80,7 +80,7 @@ class Reader
 
     /**
      * ask method
-     * 
+     *
      * @return mixed $action
      */
 
@@ -91,13 +91,13 @@ class Reader
 
     /**
      * run method
-     * 
+     *
      * @param mixed $env Environment variable
-     * @return mixed $action 
+     * @return mixed $action
      */
 
     public function run($env)
     {
-        return call_user_func($this->action, $env);   
+        return call_user_func($this->action, $env);
     }
 }

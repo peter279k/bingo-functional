@@ -2,7 +2,7 @@
 
 /**
  * indexOf function
- * 
+ *
  * indexOf :: [a] -> b -> c -> ([a], b, c) -> d
  * @package bingo-functional
  * @author Lochemem Bruno Michael
@@ -21,7 +21,7 @@ function indexOf(array $collection, $value, int $fromIndex = 0)
     $indexOf = function (int $init = 0, int $index) use (
         $value,
         $valKeys,
-        $valCount, 
+        $valCount,
         &$indexOf,
         $collection
     ) {

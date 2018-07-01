@@ -42,8 +42,8 @@ function curryRight(callable $func, $required = true) : callable
 {
     $toCurry = new \ReflectionFunction($func);
 
-    $paramCount = $required ? 
-        $toCurry->getNumberOfRequiredParameters() : 
+    $paramCount = $required ?
+        $toCurry->getNumberOfRequiredParameters() :
         $toCurry->getNumberOfParameters();
 
     return curryRightN($paramCount, $func);

@@ -3,7 +3,9 @@
 namespace Chemem\Bingo\Functional\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Chemem\Bingo\Functional\Functors\Either\{Either, Left, Right};
+use Chemem\Bingo\Functional\Functors\Either\Either;
+use Chemem\Bingo\Functional\Functors\Either\Left;
+use Chemem\Bingo\Functional\Functors\Either\Right;
 
 class EitherTypeTest extends TestCase
 {

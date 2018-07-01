@@ -3,7 +3,7 @@
 /**
  * extend function
  *
- * extend :: [a] [b] -> [a, b] 
+ * extend :: [a] [b] -> [a, b]
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0

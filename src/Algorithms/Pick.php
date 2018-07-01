@@ -18,8 +18,8 @@ function pick(array $values, $search)
     $valCount = count($values);
     $arrVals = array_values($values);
 
-    $pickFn = function (int $init = 0, array $acc = []) use ( 
-        $search, 
+    $pickFn = function (int $init = 0, array $acc = []) use (
+        $search,
         &$pickFn,
         $arrVals,
         $valCount

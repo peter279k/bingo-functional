@@ -21,7 +21,7 @@ function isArrayOf(array $collection) : string
         if ($init >= $elCount) {
             $types = unique($acc);
             
-            return count($types) == 1 ? head($types) : 'mixed'; 
+            return count($types) == 1 ? head($types) : 'mixed';
         }
 
         $acc[] = gettype($collection[$init]);

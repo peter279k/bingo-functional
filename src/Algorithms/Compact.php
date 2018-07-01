@@ -3,7 +3,7 @@
 /**
  * Compact function
  *
- * compact :: [a, Bool b] -> [a] 
+ * compact :: [a, Bool b] -> [a]
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0

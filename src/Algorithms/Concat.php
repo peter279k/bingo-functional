@@ -2,7 +2,7 @@
 
 /**
  * Concat function
- * 
+ *
  * concat :: String a, [b] -> (a, [b]) -> String c
  * @package bingo-functional
  * @author Lochemem Bruno Michael

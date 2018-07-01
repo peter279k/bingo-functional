@@ -335,8 +335,8 @@ class AlgorithmTest extends TestCase
     public function testFromPairsFunctionCreatesKeyValueArrayPairs()
     {
         $fromPairs = A\fromPairs([
-            ['foo', 'baz'], 
-            ['bar', 'baz'], 
+            ['foo', 'baz'],
+            ['bar', 'baz'],
             ['boo', 1]
         ]);
 
@@ -350,14 +350,14 @@ class AlgorithmTest extends TestCase
     public function testToPairsFunctionCreatesArraysWithTwoElementsEach()
     {
         $toPairs = A\toPairs([
-            'foo' => 'baz', 
-            'bar' => 'baz', 
+            'foo' => 'baz',
+            'bar' => 'baz',
             'boo' => 1
         ]);
 
         $this->assertEquals([
-            ['foo', 'baz'], 
-            ['bar', 'baz'], 
+            ['foo', 'baz'],
+            ['bar', 'baz'],
             ['boo', 1]
         ], $toPairs);
     }
@@ -379,7 +379,7 @@ class AlgorithmTest extends TestCase
             [1, 2, 3, false, true],
             function ($val) {
                 return is_bool($val);
-            } 
+            }
         );
 
         $this->assertFalse($every);
@@ -457,8 +457,8 @@ class AlgorithmTest extends TestCase
 
     public function testToExceptionWrapsFunctionPrintsExceptionMessageIfExceptionIsThrownOrResult()
     {
-        $func = function () { 
-            throw new \Exception('I am an exception'); 
+        $func = function () {
+            throw new \Exception('I am an exception');
         };
 
         $result = function ($val) {
@@ -474,7 +474,7 @@ class AlgorithmTest extends TestCase
     {
         $fib = A\trampoline(
             function ($val) use (&$fib) {
-                return $val < 2 ? $val : $fib($val - 1) + $fib($val - 2); 
+                return $val < 2 ? $val : $fib($val - 1) + $fib($val - 2);
             }
         );
 
@@ -485,7 +485,7 @@ class AlgorithmTest extends TestCase
     {
         $fib = A\trampoline(
             function ($val) use (&$fib) {
-                return $val < 2 ? $val : $fib($val - 1) + $fib($val - 2); 
+                return $val < 2 ? $val : $fib($val - 1) + $fib($val - 2);
             }
         );
 

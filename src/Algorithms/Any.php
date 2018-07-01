@@ -2,7 +2,7 @@
 
 /**
  * any function
- * 
+ *
  * any :: [a] -> (b -> Bool) -> c
  * @package bingo-functional
  * @author Lochemem Bruno Michael

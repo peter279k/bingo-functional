@@ -3,7 +3,7 @@
 /**
  * Throttle function
  *
- * throttle :: Callable a Int b -> a 
+ * throttle :: Callable a Int b -> a
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0

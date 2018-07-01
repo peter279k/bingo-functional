@@ -2,7 +2,7 @@
 
 /**
  * fill function
- * 
+ *
  * fill :: [a] -> b -> c -> d -> ([a], b, c, d) -> [e]
  * @package bingo-functional
  * @author Lochemem Bruno Michael
@@ -26,7 +26,7 @@ function fill(array $collection, $value, int $start, int $end) : array
         $acc[$init] = $value;
 
         return $fillFunc($init + 1, $acc);
-    }; 
+    };
 
     return $fillFunc($start, $vals);
 }

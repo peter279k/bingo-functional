@@ -2,7 +2,7 @@
 
 /**
  * toException function
- * 
+ *
  * toException :: (a) -> (b(c)) -> d
  * @package bingo-functional
  * @author Lochemem Bruno Michael

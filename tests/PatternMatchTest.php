@@ -3,10 +3,8 @@
 namespace Chemem\Bingo\Functional\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Chemem\Bingo\Functional\{
-    Algorithms as A,
-    PatternMatching as PM
-};
+use Chemem\Bingo\Functional\Algorithms as A;
+use Chemem\Bingo\Functional\PatternMatching as PM;
 
 class PatternMatchTest extends TestCase
 {
@@ -15,10 +13,10 @@ class PatternMatchTest extends TestCase
         $numConditions = PM\getNumConditions(['(a:b:_)', '(a:_)', '_']);
 
         $this->assertEquals(
-            $numConditions, 
+            $numConditions,
             [
-                '(a:b:_)' => 2, 
-                '(a:_)' => 1, 
+                '(a:b:_)' => 2,
+                '(a:_)' => 1,
                 '_' => 0
             ]
         );
@@ -59,7 +57,7 @@ class PatternMatchTest extends TestCase
                 '_' => function () {
                     return 'undefined';
                 }
-            ] 
+            ]
         );
 
         $this->assertEquals($strings('foo'), 'foo');

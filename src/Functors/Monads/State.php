@@ -2,7 +2,7 @@
 
 /**
  * State monad
- * 
+ *
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0
@@ -20,13 +20,13 @@ class State
 
     /**
      * @access private
-     * @var mixed $value The initial state: value to transform 
+     * @var mixed $value The initial state: value to transform
      */
     private $value;
 
     /**
      * State monad constructor
-     * 
+     *
      * @param mixed $value
      * @param mixed $state
      */
@@ -38,7 +38,7 @@ class State
 
     /**
      * of method
-     * 
+     *
      * @static of
      * @param mixed $initVal
      * @return object State
@@ -51,7 +51,7 @@ class State
 
     /**
      * evalState method
-     * 
+     *
      * @param callable $action
      * @return object State
      */
@@ -66,7 +66,7 @@ class State
 
     /**
      * map method
-     * 
+     *
      * @param callable $function
      * @return object State
      */
@@ -85,7 +85,7 @@ class State
 
     /**
      * bind method
-     * 
+     *
      * @param callable $action
      * @return object State
      */
@@ -97,7 +97,7 @@ class State
 
     /**
      * evalState method
-     * 
+     *
      * @return array [$value, $state]
      */
 

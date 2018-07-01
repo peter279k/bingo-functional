@@ -2,7 +2,7 @@
 
 /**
  * filter function
- * 
+ *
  * filter :: (a -> Bool) -> [a] -> [a]
  * @package bingo-functional
  * @author Lochemem Bruno Michael

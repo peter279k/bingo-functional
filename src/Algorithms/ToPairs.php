@@ -2,7 +2,7 @@
 
 /**
  * toPairs function
- * 
+ *
  * toPairs :: [a] -> [[b, c]]
  * @package bingo-functional
  * @author Lochemem Bruno Michael

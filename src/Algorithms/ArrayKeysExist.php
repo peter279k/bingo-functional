@@ -2,7 +2,7 @@
 
 /**
  * arrayKeysExist function
- * 
+ *
  * arrayKeysExist :: [a] b -> (b -> [a]) -> Bool c
  * @package bingo-functional
  * @author Lochemem Bruno Michael
@@ -20,7 +20,7 @@ function arrayKeysExist(array $toSearch, ...$keys) : bool
         $keys
     );
 
-    return count($keysIntersection) !== count($keys) ? 
+    return count($keysIntersection) !== count($keys) ?
         false :
         true;
 }

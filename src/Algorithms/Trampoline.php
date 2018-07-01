@@ -2,7 +2,7 @@
 
 /**
  * trampoline function
- * 
+ *
  * trampoline :: (a) -> (b) -> a(b) -> c
  * @package bingo-functional
  * @author Lochemem Bruno Michael
@@ -24,7 +24,9 @@ function trampoline(callable $func)
         if (!$recursing) {
             $recursing = true;
 
-            while (!empty($finalArgs)) { $result = $func(...array_shift($finalArgs)); }
+            while (!empty($finalArgs)) {
+                $result = $func(...array_shift($finalArgs));
+            }
 
             $recursing = false;
         }

@@ -2,7 +2,7 @@
 
 /**
  * List monad
- * 
+ *
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0
@@ -22,7 +22,7 @@ class ListMonad
 
     /**
      * ListMonad constructor
-     * 
+     *
      * @param mixed $collection
      */
 
@@ -33,7 +33,7 @@ class ListMonad
 
     /**
      * of method
-     * 
+     *
      * @param mixed $collection
      * @return object ListMonad
      */
@@ -45,7 +45,7 @@ class ListMonad
 
     /**
      * bind method
-     * 
+     *
      * @param callable $function
      * @return object ListMonad
      */
@@ -73,7 +73,7 @@ class ListMonad
 
     /**
      * extract method
-     * 
+     *
      * @return array $collection
      */
 

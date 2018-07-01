@@ -3,7 +3,7 @@
 /**
  * DropRight function
  *
- * dropRight :: [a, b] Int c -> [a] 
+ * dropRight :: [a, b] Int c -> [a]
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0
@@ -20,9 +20,9 @@ function dropRight(array $collection, int $number = 1, $acc = []) : array
     $valCount = count($collection);
 
     $dropFn = function (int $init, array $acc = []) use (
-        $colVals, 
-        $colKeys, 
-        &$dropFn, 
+        $colVals,
+        $colKeys,
+        &$dropFn,
         $valCount
     ) {
         if ($init < 0) {

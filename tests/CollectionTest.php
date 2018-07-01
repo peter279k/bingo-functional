@@ -15,7 +15,9 @@ class CollectionTest extends TestCase
     public function testMapFunctionCreatesNewCollectionInstance()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->map(function ($val) { return $val + 2; });
+            ->map(function ($val) {
+                return $val + 2;
+            });
 
         $this->assertInstanceOf(Collection::class, $list);
     }
@@ -23,7 +25,9 @@ class CollectionTest extends TestCase
     public function testMapFunctionAppliesFunctionToAllValuesInList()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->map(function ($val) { return $val + 2; })
+            ->map(function ($val) {
+                return $val + 2;
+            })
             ->getList();
 
         $this->assertEquals(\SplFixedArray::fromArray([3, 4, 5, 6]), $list);
@@ -32,7 +36,9 @@ class CollectionTest extends TestCase
     public function testFlatMapFunctionCreatesArray()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->flatMap(function ($val) { return $val * 2; });
+            ->flatMap(function ($val) {
+                return $val * 2;
+            });
 
         $this->assertInternalType('array', $list);
     }
@@ -40,7 +46,9 @@ class CollectionTest extends TestCase
     public function testFlatMapFunctionAppliesFunctionToAllValuesInList()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->flatMap(function ($val) { return $val * 2; });
+            ->flatMap(function ($val) {
+                return $val * 2;
+            });
 
         $this->assertEquals([2, 4, 6, 8], $list);
     }
@@ -48,7 +56,9 @@ class CollectionTest extends TestCase
     public function testFilterFunctionCreatesNewCollectionInstance()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->filter(function ($val) { return $val > 2; });
+            ->filter(function ($val) {
+                return $val > 2;
+            });
 
         $this->assertInstanceOf(Collection::class, $list);
     }
@@ -56,7 +66,9 @@ class CollectionTest extends TestCase
     public function testFilterFunctionOutputsListOfValuesThatMatchFunctionBooleanPredicate()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->filter(function ($val) { return $val > 2; })
+            ->filter(function ($val) {
+                return $val > 2;
+            })
             ->getList();
             
         $this->assertEquals(\SplFixedArray::fromArray([3, 4]), $list);
@@ -65,7 +77,9 @@ class CollectionTest extends TestCase
     public function testFoldFunctionCreatesNewCollectionInstance()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->fold(function ($acc, $val) { return $acc + $val; }, 1);
+            ->fold(function ($acc, $val) {
+                return $acc + $val;
+            }, 1);
 
         $this->assertInstanceOf(Collection::class, $list);
     }
@@ -73,7 +87,9 @@ class CollectionTest extends TestCase
     public function testFoldFunctionTransformsListIntoSingleValue()
     {
         $list = Collection::from(1, 2, 3, 4)
-            ->fold(function ($acc, $val) { return $acc + $val; }, 1)
+            ->fold(function ($acc, $val) {
+                return $acc + $val;
+            }, 1)
             ->getList();
 
         $this->assertEquals(\SplFixedArray::fromArray([11]), $list);
@@ -135,7 +151,9 @@ class CollectionTest extends TestCase
     {
         $acc = [];
         $list = Collection::from(13, 15, 16, 18, 14, 20)
-            ->filter(function ($val) { return $val % 2 == 0; });
+            ->filter(function ($val) {
+                return $val % 2 == 0;
+            });
 
         foreach ($list as $val) {
             if ($val < 15) {

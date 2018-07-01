@@ -2,7 +2,7 @@
 
 /**
  * reverse function
- * 
+ *
  * reverse :: [a, b] -> [b, a]
  * @package bingo-functional
  * @author Lochemem Bruno Michael

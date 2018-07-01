@@ -11,11 +11,11 @@
 namespace Chemem\Bingo\Functional\Functors\Applicatives;
 
 use Chemem\Bingo\Functional\Common\Applicatives\ApplicativeAbstract;
-use Chemem\Bingo\Functional\Functors\Either\{Either, Left, Right};
+use Chemem\Bingo\Functional\Functors\Either\Either;
+use Chemem\Bingo\Functional\Functors\Either\Left;
+use Chemem\Bingo\Functional\Functors\Either\Right;
 
-class CollectionApplicative
-    extends ApplicativeAbstract
-    implements \IteratorAggregate
+class CollectionApplicative extends ApplicativeAbstract implements \IteratorAggregate
 {
     /**
      * @access private

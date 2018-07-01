@@ -2,7 +2,7 @@
 
 /**
  * groupBy function
- * 
+ *
  * groupBy :: [a] -> b -> [c]
  * @package bingo-functional
  * @author Lochemem Bruno Michael
@@ -27,8 +27,8 @@ function groupBy(array $collection, $key) : array
             return $acc;
         }
 
-        $acc[$collection[$init][$key]][] = isset($collection[$init][$key]) ? 
-            $collection[$init] : 
+        $acc[$collection[$init][$key]][] = isset($collection[$init][$key]) ?
+            $collection[$init] :
             [];
         
         return $groupFn($init + 1, $acc);

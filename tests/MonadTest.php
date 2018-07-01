@@ -3,7 +3,11 @@
 namespace Chemem\Bingo\Functional\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Chemem\Bingo\Functional\Functors\Monads\{IO, Writer, Reader, State, ListMonad};
+use Chemem\Bingo\Functional\Functors\Monads\IO;
+use Chemem\Bingo\Functional\Functors\Monads\Writer;
+use Chemem\Bingo\Functional\Functors\Monads\Reader;
+use Chemem\Bingo\Functional\Functors\Monads\State;
+use Chemem\Bingo\Functional\Functors\Monads\ListMonad;
 
 class MonadTest extends TestCase
 {

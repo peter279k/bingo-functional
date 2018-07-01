@@ -3,7 +3,7 @@
 /**
  * DropLeft function
  *
- * dropLeft :: [a, b] Int c -> [b] 
+ * dropLeft :: [a, b] Int c -> [b]
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0
@@ -20,9 +20,9 @@ function dropLeft(array $collection, int $number = 1, array $acc = []) : array
     $valCount = count($collection);
 
     $dropFn = function (int $init, array $acc = []) use (
-        $colVals, 
-        $colKeys, 
-        &$dropFn, 
+        $colVals,
+        $colKeys,
+        &$dropFn,
         $valCount
     ) {
         if ($init >= $valCount) {
@@ -35,4 +35,4 @@ function dropLeft(array $collection, int $number = 1, array $acc = []) : array
     };
 
     return $dropFn($number);
-} 
+}

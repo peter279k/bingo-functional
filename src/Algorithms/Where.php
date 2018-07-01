@@ -2,7 +2,7 @@
 
 /**
  * where function
- * 
+ *
  * where :: [a] -> [b] -> [c]
  * @package bingo-functional
  * @author Lochemem Bruno Michael
@@ -19,10 +19,10 @@ function where(array $collection, array $search) : array
     list($searchKey, $searchVal) = head(toPairs($search));
 
     $whereFn = function (int $init = 0, array $acc = []) use (
-        $arrCount, 
-        &$whereFn, 
+        $arrCount,
+        &$whereFn,
         $searchKey,
-        $searchVal, 
+        $searchVal,
         $collection
     ) {
         if ($init >= $arrCount) {
@@ -36,10 +36,10 @@ function where(array $collection, array $search) : array
             return $result;
         }
 
-        $acc[] = isset($collection[$init][$searchKey]) && 
+        $acc[] = isset($collection[$init][$searchKey]) &&
             $collection[$init][$searchKey] == $searchVal ?
                 $collection[$init] :
-                []; 
+                [];
         
         return $whereFn($init + 1, $acc);
     };

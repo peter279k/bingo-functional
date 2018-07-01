@@ -2,7 +2,7 @@
 
 /**
  * Writer monad
- * 
+ *
  * @package bingo-functional
  * @author Lochemem Bruno Michael
  * @license Apache 2.0
@@ -24,11 +24,11 @@ class Writer
      * @access private
      * @var string $logMsg
      */
-    private $logMsg; 
+    private $logMsg;
 
     /**
      * Writer monad constructor
-     * 
+     *
      * @param mixed $value
      * @param string $logMsg
      */
@@ -40,7 +40,7 @@ class Writer
 
     /**
      * of method
-     * 
+     *
      * @static of
      * @param mixed $value
      * @param string $logMsg
@@ -56,7 +56,7 @@ class Writer
 
     /**
      * map method
-     * 
+     *
      * @param callable $function The morphism used to transform the state value
      * @param string $logMsg
      * @return object Writer
@@ -65,14 +65,14 @@ class Writer
     public function map(callable $function, $logMsg) : Writer
     {
         return new static(
-            call_user_func($function, $this->value), 
+            call_user_func($function, $this->value),
             A\concat(PHP_EOL, $this->logMsg, $logMsg)
         );
     }
     
     /**
      * bind method
-     * 
+     *
      * @param callable $function
      * @param string $logMsg
      * @return object Writer
@@ -85,7 +85,7 @@ class Writer
 
     /**
      * flatMap method
-     * 
+     *
      * @param callable $function
      * @param string $logMsg
      * @return mixed $result
@@ -101,7 +101,7 @@ class Writer
 
     /**
      * run method
-     * 
+     *
      * @return array [$value, $logMsg]
      */
 
