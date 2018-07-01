@@ -60,10 +60,11 @@
 
                 <nav class="pagination">
                     <div>« <a href="https://ace411.github.io/bingo-functional/collection.html">Collection Helpers</a></div>
-                    <div><a href="https://ace411.github.io/bingo-functional/functors.html">Functors</a> »</div>
+                    <div><a href="https://ace411.github.io/bingo-functional/immutable-lists.html">Immutable Lists</a> »</div>
                 </nav>
 
 <!-- CONTENT START -->
+<h1 id="pattern-matching">Pattern Matching</h1>
 <p>The goal of pattern matching is to bind values to successful matches. Pattern matching is similar to the switch statement. The patterns used in the pattern-matching function are a near facsimile of the <a href="https://en.wikibooks.org/wiki/Haskell/Pattern_matching">Haskell pattern-matching patterns</a>. Because pattern matching is a core feature of a language like Haskell, implementing it in PHP is quite the uphill task. The bingo-functional library has two pattern matching functions that conform to the patterns shown in the table below: <code>match</code> and <code>patternMatch</code>.</p>
 <table>
 <thead>
@@ -99,11 +100,6 @@
 <td>_</td>
 <td><code>'_'</code></td>
 </tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
 <p><br /></p>
@@ -121,15 +117,9 @@
 
 $match = PM\match(
     [
-        '(x:xs:_)' =&gt; function (int $x, int $xs) {
-            return $x / $xs;
-        },
-        '(x:_)' =&gt; function (int $x) {
-            return $x * 2;
-        },
-        '_' =&gt; function () {
-            return 1;
-        }
+        '(x:xs:_)' =&gt; function (int $x, int $xs) { return $x / $xs; },
+        '(x:_)' =&gt; function (int $x) { return $x * 2; },
+        '_' =&gt; function () { return 1; }
     ]
 );
 
@@ -148,43 +138,27 @@ $result = $match([10, 5]);</code></pre>
 
 $scalarMatch = PM\patternMatch(
     [
-        '"foo"' =&gt; function () {
-            $val = strtoupper('foo');
-
-            return $val;
-        },
-        '"bar"' =&gt; function () {
-            return 'bar';
-        },
-        '_' =&gt; function () {
-            return 'undefined';
-        }
+        '"foo"' =&gt; function () { return strtoupper('foo'); },
+        '"bar"' =&gt; function () { return 'bar'; },
+        '_' =&gt; function () { return 'undefined'; }
     ],
     'foo'
 ); //outputs FOO</code></pre>
 <p>The patternMatch function's primary feature, the array match is possible for multiple values parsed into an array.</p>
 <pre><code class="language-php">$arrayMatch = PM\patternMatch(
     [
-        '["foo", "bar", baz]' =&gt; function (string $baz) {
-            $val = lcfirst(strtoupper($baz));
-
-            return $val;
+        '["foo", "bar", baz]' =&gt; function (string $baz) { 
+            return lcfirst(strtoupper($baz)); 
         },
-        '["foo", "bar"]' =&gt; function () {
-            $val = strtoupper('foo-bar');
-
-            return $val;
-        },
-        '_' =&gt; function () {
-            return 'undefined';
-        }
+        '["foo", "bar"]' =&gt; function () { return strtoupper('foo-bar'); },
+        '_' =&gt; function () { return 'undefined'; }
     ],
     ['foo', 'bar', 'functional']
 ); //outputs fUNCTIONAL</code></pre>
 <!-- CONTENT END -->
                 <nav class="pagination">
                     <div>« <a href="https://ace411.github.io/bingo-functional/collection.html">Collection Helpers</a></div>
-                    <div><a href="https://ace411.github.io/bingo-functional/functors.html">Functors</a> »</div>
+                    <div><a href="https://ace411.github.io/bingo-functional/immutable-lists.html">Immutable Lists</a> »</div>
                 </nav>
             </article>
             <aside class="sidebar">
@@ -194,6 +168,7 @@ $scalarMatch = PM\patternMatch(
                 <div class="bulletlink"><a href="functions.html">Function Helpers</a></div>
                 <div class="bulletlink"><a href="collection.html">Collection Helpers</a></div>
                 <div class="bulletlink"><a href="pattern-matching.html">Pattern Matching</a></div>
+                <div class="bulletlink"><a href="immutable-lists.html">Immutable Lists</a></div>
                 <div class="bulletlink"><a href="functors.html">Functors</a></div>
                 <div class="bulletlink"><a href="repl.html">Console</a></div>
                 <div class="bulletlink"><a href="changes.html">Changes</a></div>

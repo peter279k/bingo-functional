@@ -64,6 +64,7 @@
                 </nav>
 
 <!-- CONTENT START -->
+<h1 id="function-helpers">Function Helpers</h1>
 <h2 id="composing-functions">Composing functions</h2>
 <pre><code>compose(callable ...$functions)</code></pre>
 <p>The ability to combine functions is a concept borrowed from mathematics. Simply put, composition is applying a function to the output of another function thereby transforming it. A function f and another function g can be 'composed' to create a function f o g.</p>
@@ -259,6 +260,18 @@ echo $throttle(0);
 );
 
 $factorial(130); //outputs float(6.4668554892205E+219)</code></pre>
+<h2 id="trampolines">Trampolines</h2>
+<pre><code>trampoline(callable $function)(mixed ...$args)</code></pre>
+<p><strong>Since:</strong> v1.10.0</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong><em>function (callable)</em></strong> - The recursive function to optimize</li>
+<li><strong><em>args (mixed)</em></strong> - The arguments of the function to optimize</li>
+</ul>
+<p>The impetus for a trampoline implementation, a tail-call optimizer, is the inability of the PHP VM to offer tail-call optimization.</p>
+<pre><code class="language-php">$fib = A\trampoline(function (int $val) use (&amp;$fib) { return $val &lt; 2 ? $val : $fib($val - 1) + $fib($val - 2); });
+
+echo $fib(11); //outputs 89</code></pre>
 <h2 id="callback-signatures">Callback signatures</h2>
 <p><strong>Note:</strong> Callbacks will not be usable beyond bingo-functional v1.7.2. Check out the <a href="https://ace411.github.io/bingo-functional/changes">changelog</a>.</p>
 <p>These are essential for proper functioning of the the following helper functions: <code>pluck()</code>, <code>pick()</code>, <code>memoize()</code>, as well as <code>isArrayOf()</code>. The following callback signatures correspond to the functions listed:</p>
@@ -290,6 +303,7 @@ $factorial(130); //outputs float(6.4668554892205E+219)</code></pre>
                 <div class="bulletlink"><a href="functions.html">Function Helpers</a></div>
                 <div class="bulletlink"><a href="collection.html">Collection Helpers</a></div>
                 <div class="bulletlink"><a href="pattern-matching.html">Pattern Matching</a></div>
+                <div class="bulletlink"><a href="immutable-lists.html">Immutable Lists</a></div>
                 <div class="bulletlink"><a href="functors.html">Functors</a></div>
                 <div class="bulletlink"><a href="repl.html">Console</a></div>
                 <div class="bulletlink"><a href="changes.html">Changes</a></div>
