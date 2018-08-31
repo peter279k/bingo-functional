@@ -229,7 +229,7 @@ class CollectionTest extends TestCase
     public function testGetIterator()
     {
         $list = Collection::from(...range(0, 10))
-            ->fill(1, 2 , 3);
+            ->fill(1, 2, 3);
         $result = $list->getIterator();
 
         $this->assertInstanceOf(\ArrayIterator::class, $result);

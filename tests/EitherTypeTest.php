@@ -2,9 +2,12 @@
 
 namespace Chemem\Bingo\Functional\Tests;
 
+use Chemem\Bingo\Functional\Functors\Either\Either;
+use Chemem\Bingo\Functional\Functors\Either\Left;
+use Chemem\Bingo\Functional\Functors\Either\Right;
 use PHPUnit\Framework\TestCase;
-use Chemem\Bingo\Functional\Functors\Either\{Either, Left, Right};
-use function Chemem\Bingo\Functional\Algorithms\{concat, identity};
+use function Chemem\Bingo\Functional\Algorithms\concat;
+use function Chemem\Bingo\Functional\Algorithms\identity;
 
 class EitherTypeTest extends TestCase
 {
@@ -23,7 +26,9 @@ class EitherTypeTest extends TestCase
     public function testEitherRightTypeBindMethod()
     {
         $val = Either::right(12);
-        $result = $val->bind(function ($val) { return $val * 2; });
+        $result = $val->bind(function ($val) {
+            return $val * 2;
+        });
 
         $this->assertEquals(24, $result->getRight());
     }
@@ -38,7 +43,9 @@ class EitherTypeTest extends TestCase
     public function testEitherLeftTypeBindMethod()
     {
         $val = Either::left(12);
-        $result = $val->bind(function ($val) { return false; });
+        $result = $val->bind(function ($val) {
+            return false;
+        });
 
         $this->assertEquals(12, $result->getLeft());
     }
@@ -49,14 +56,14 @@ class EitherTypeTest extends TestCase
             Either::right(12),
             Either::right(32),
             Either::left(false),
-            Either::left('undefined')
+            Either::left('undefined'),
         ]);
 
         $this->assertInternalType('array', $eithers);
         $this->assertEquals(
             [
-                'left' => [false, 'undefined'],
-                'right' => [12, 32]
+                'left'  => [false, 'undefined'],
+                'right' => [12, 32],
             ],
             $eithers
         );
@@ -97,7 +104,9 @@ class EitherTypeTest extends TestCase
     public function testEitherRightTypeFlatMapMethodReturnsNonEncapsulatedValue()
     {
         $value = Either::right(12)
-            ->flatMap(function (int $a) : int { return $a + 10; });
+            ->flatMap(function (int $a) : int {
+                return $a + 10;
+            });
 
         $this->assertEquals($value, 22);
     }
@@ -105,7 +114,9 @@ class EitherTypeTest extends TestCase
     public function testEitherRightTypeMapMethodReturnsEncapsulatedValue()
     {
         $value = Either::right(12)
-            ->map(function (int $a) : int { return $a + 10; });
+            ->map(function (int $a) : int {
+                return $a + 10;
+            });
 
         $this->assertInstanceOf(Either::class, $value);
         $this->assertEquals(22, $value->getRight());
@@ -114,7 +125,9 @@ class EitherTypeTest extends TestCase
     public function testEitherRightTypeFilterMethodReturnsEncapsulatedValueBasedOnPredicate()
     {
         $value = Either::right('foo')
-            ->filter(function (string $str) : bool { return is_string($str); }, $GLOBALS['ERR_MSG_STR']);
+            ->filter(function (string $str) : bool {
+                return is_string($str);
+            }, $GLOBALS['ERR_MSG_STR']);
 
         $this->assertInstanceOf(Right::class, $value);
         $this->assertEquals('foo', $value->getRight());
@@ -122,7 +135,9 @@ class EitherTypeTest extends TestCase
 
     public function testLiftMethodEnsuresFunctionsAcceptEitherTypeArguments()
     {
-        $lift = Either::lift(function (int $a, int $b) { return $b / $a; }, Either::left(0));
+        $lift = Either::lift(function (int $a, int $b) {
+            return $b / $a;
+        }, Either::left(0));
 
         $this->assertInstanceOf(Either::class, $lift(Either::right(6), Either::right(12)));
         $this->assertEquals(2, $lift(Either::right(6), Either::right(12))->getRight());
@@ -131,7 +146,9 @@ class EitherTypeTest extends TestCase
     public function testEitherRightTypeFilterMethodReturnsLeftValueIfConditionEvaluatesToFalse()
     {
         $value = Either::right(12)
-            ->filter(function (int $val) : bool { return is_string($val); }, $GLOBALS['ERR_MSG_STR']);
+            ->filter(function (int $val) : bool {
+                return is_string($val);
+            }, $GLOBALS['ERR_MSG_STR']);
 
         $this->assertInstanceOf(Left::class, $value);
         $this->assertEquals($GLOBALS['ERR_MSG_STR'], $value->getLeft());
@@ -140,9 +157,15 @@ class EitherTypeTest extends TestCase
     public function testMapFlatMapFilterMethodsHaveNoEffectOnLeftValue()
     {
         $error = Either::left($GLOBALS['ERR_MSG'])
-            ->filter(function (string $val) : bool { return is_string($val); }, $GLOBALS['ERR_MSG_STR'])
-            ->map(function (string $val) { return concat('/', $val, '/'); })
-            ->flatMap(function (string $val) { return concat('.', $val , '.'); });
+            ->filter(function (string $val) : bool {
+                return is_string($val);
+            }, $GLOBALS['ERR_MSG_STR'])
+            ->map(function (string $val) {
+                return concat('/', $val, '/');
+            })
+            ->flatMap(function (string $val) {
+                return concat('.', $val, '.');
+            });
 
         $this->assertEquals($GLOBALS['ERR_MSG'], $error);
     }
@@ -152,8 +175,12 @@ class EitherTypeTest extends TestCase
         $val = Either::right(12);
 
         $mutated = $val
-            ->filter(function ($val) { return $val > 20; }, identity(0))
-            ->map(function ($val) { return $val + 10; })
+            ->filter(function ($val) {
+                return $val > 20;
+            }, identity(0))
+            ->map(function ($val) {
+                return $val + 10;
+            })
             ->orElse(Either::right(25));
 
         $this->assertInstanceOf(Either::class, $mutated);
