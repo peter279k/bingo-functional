@@ -1,9 +1,9 @@
 <?php
 
 /**
- * 
+ *
  * Pattern matching functions
- * 
+ *
  * @author Lochemem Bruno Michael
  * @license Apache-2.0
  */
@@ -13,9 +13,9 @@ namespace Chemem\Bingo\Functional\PatternMatching;
 use Chemem\Bingo\Functional\Algorithms as A;
 
 /**
- * 
+ *
  * match function
- * 
+ *
  * @param array $options
  * @return callable $matchCons
  */
@@ -62,9 +62,9 @@ function match(array $options) : callable
 }
 
 /**
- * 
+ *
  * getNumConditions function
- * 
+ *
  * @param array $conditions
  * @return array $matches
  */
@@ -98,11 +98,11 @@ function getNumConditions(array $conditions)
 }
 
 /**
- * 
+ *
  * patternMatch function
- * 
+ *
  * patternMatch :: [a, b] -> a -> (a())
- * 
+ *
  * @param array $patterns
  * @param mixed $value
  * @return mixed $result
@@ -128,11 +128,11 @@ function patternMatch(array $patterns, $value)
 }
 
 /**
- * 
+ *
  * evalArrayPattern function
- * 
+ *
  * evalArrayPattern :: [a, b] -> [a] -> (a())
- * 
+ *
  * @param array $patterns
  * @param array $value
  * @return mixed $result
@@ -183,13 +183,13 @@ function evalArrayPattern(array $patterns, array $value)
                         $patterns
                     );
                 },
-                
-                function ($modified) use ($value, $patterns) {                     
+
+                function ($modified) use ($value, $patterns) {
                     $nonDoubleCount = function ($patterns, $count = 0) {
                         foreach ($patterns as $index => $value) {
                             foreach ($value as $subIndx => $subVal) {
                                 $count += !preg_match('/[\"]+/', $subVal) ? 1 : 0;
-                            } 
+                            }
                         }
 
                         return $count;
@@ -207,16 +207,16 @@ function evalArrayPattern(array $patterns, array $value)
         },
         function ($modified) use ($patterns, $value, $valCount) {
             $modCount = count($modified);
-            
+
             $nullCount = empty($modified) ?
                 A\identity(0) :
                 A\fold(
-                    function ($acc, $val) { 
-                        $acc += is_null($val) ? 1 : 0; 
-                        return $acc; 
-                    }, 
-                    A\head($modified), 
-                    0                    
+                    function ($acc, $val) {
+                        $acc += is_null($val) ? 1 : 0;
+                        return $acc;
+                    },
+                    A\head($modified),
+                    0
                 );
 
             switch ($modCount) {
@@ -226,10 +226,10 @@ function evalArrayPattern(array $patterns, array $value)
                         'args' => []
                     ];
                     break;
-                
+
                 case 1:
                     return [
-                        'func' => $patterns[A\head(array_keys($modified))], 
+                        'func' => $patterns[A\head(array_keys($modified))],
                         'args' => $nullCount > 0 ? A\dropLeft($value, $valCount - $nullCount) : []
                     ];
                     break;
@@ -240,7 +240,7 @@ function evalArrayPattern(array $patterns, array $value)
                             A\head(
                                 array_keys(
                                     array_filter(
-                                        $modified, 
+                                        $modified,
                                         function ($pattern) use ($nullCount, $value) { return A\dropRight($pattern, $nullCount) == A\dropRight($value, $nullCount); }
                                     )
                                 )
@@ -257,11 +257,11 @@ function evalArrayPattern(array $patterns, array $value)
 }
 
 /**
- * 
+ *
  * evalStringPattern function
- * 
+ *
  * evalStringPattern :: [a, b] -> a -> (a())
- *  
+ *
  * @param array $patterns
  * @param string $value
  * @return mixed $result
@@ -315,14 +315,14 @@ function evalStringPattern(array $patterns, string $value)
 }
 
 /**
- * 
+ *
  * evalObjectPattern function
- * 
+ *
  * evalObjectPattern :: [a, b] -> b -> (b())
- * 
+ *
  * @param array $patterns
  * @param object $value
- * @return mixed $result  
+ * @return mixed $result
  */
 
 const evalObjectPattern = 'Chemem\\Bingo\\Functional\\PatternMatching\\evalObjectPattern';
@@ -337,7 +337,7 @@ function evalObjectPattern(array $patterns, $value)
         A\partialLeft(A\filter, function ($classStr) use ($valObj) { return class_exists($classStr) && $classStr == $valObj; }),
         A\head,
         function (string $match) { return !empty($match) && !is_null($match) ? A\identity($match) : A\identity('_'); },
-        function (string $key) use ($patterns) { 
+        function (string $key) use ($patterns) {
             $func = $key == '_' ? isset($patterns['_']) ? A\identity($patterns['_']) : constantFunction(false) : A\identity($patterns[$key]);
 
             return call_user_func($func);

@@ -21,6 +21,14 @@ class ApplicativeTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(24, $app);
     }
 
+    public function testApplicativeOfShouldReturnGivenValue()
+    {
+        $app = Applicative::of(12)
+            ->getValue();
+
+        $this->assertEquals(12, $app);
+    }
+
     public function testMapMethodAppliesCallbackToValueDefinedInApplicativeContext()
     {
         $app = Applicative::pure('foo')

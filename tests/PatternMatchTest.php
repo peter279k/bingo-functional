@@ -46,6 +46,24 @@ class PatternMatchTest extends TestCase
         $this->assertEquals($result, 2);
     }
 
+    public function testMatchFunctionComputesMatchesWithNoUnderLine()
+    {
+        $match = PM\match(
+            [
+                '(dividend:divisor:_)' => function (int $dividend, int $divisor) {
+                    return $dividend / $divisor;
+                },
+                '(dividend:_)' => function (int $dividend) {
+                    return $dividend / 2;
+                },
+            ]
+        );
+
+        $result = $match([10, 5]);
+
+        $this->assertFalse($result);
+    }
+
     public function testEvalStringPatternEvaluatesStrings()
     {
         $strings = A\partialLeft(
@@ -130,6 +148,31 @@ class PatternMatchTest extends TestCase
         );
 
         $this->assertEquals($pattern, 'FOO');
+    }
+
+    public function testPatternMatchFunctionPerformsSingleObjectMatch()
+    {
+        $pattern = PM\patternMatch(
+            [
+                '"foo"' => function () {
+                    $val = strtoupper('FOO');
+
+                    return $val;
+                },
+                '"12"' => function () {
+                    return 12 * 12;
+                },
+                '_' => function () {
+                    return 'undefined';
+                },
+                \stdClass::class => function () {
+                    return 'object';
+                },
+            ],
+            new \stdClass('foo')
+        );
+
+        $this->assertEquals($pattern, 'object');
     }
 
     public function testPatternMatchFunctionPerformsMultipleValueSensitiveMatch()

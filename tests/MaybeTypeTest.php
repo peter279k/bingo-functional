@@ -40,12 +40,22 @@ class MaybeTypeTest extends TestCase
         $this->assertFalse($val->isNothing());
     }
 
+    public function testMaybeOrElse()
+    {
+        $val = Maybe::just(12);
+        $result = $val->orElse($val);
+
+        $this->assertInstanceOf(Maybe::class, $result);
+        $this->assertEquals(12, $result->getJust());
+    }
+
     public function testMaybeNothingTypeValueIsNothing()
     {
         $val = Maybe::nothing();
 
         $this->assertTrue($val->isNothing());
         $this->assertFalse($val->isJust());
+        $this->assertNull($val->getJust());
     }
 
     public function testMaybeLiftMethodChangesFunctionsToAcceptMaybeTypes()
@@ -83,7 +93,7 @@ class MaybeTypeTest extends TestCase
     {
         $val = Maybe::just('foo')
             ->filter(function (string $str) : bool { return is_string($str); });
-        
+
         $this->assertInstanceOf(Just::class, $val);
         $this->assertEquals('foo', $val->getJust());
     }

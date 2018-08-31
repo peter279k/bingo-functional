@@ -20,6 +20,29 @@ class EitherTypeTest extends TestCase
         $this->assertInstanceOf(Right::class, $val);
     }
 
+    public function testEitherRightTypeBindMethod()
+    {
+        $val = Either::right(12);
+        $result = $val->bind(function ($val) { return $val * 2; });
+
+        $this->assertEquals(24, $result->getRight());
+    }
+
+    public function testEitherLeftTypeIsRightMethod()
+    {
+        $val = Either::left(12);
+
+        $this->assertFalse($val->isRight());
+    }
+
+    public function testEitherLeftTypeBindMethod()
+    {
+        $val = Either::left(12);
+        $result = $val->bind(function ($val) { return false; });
+
+        $this->assertEquals(12, $result->getLeft());
+    }
+
     public function testPartitionEithersReturnsLeftRightUnzippedList()
     {
         $eithers = Either::partitionEithers([
